@@ -5,10 +5,11 @@ import styled from 'styled-components/native';
 import Colors from '../../constans/Colors';
 import NoteColors from '../../constans/NoteColors';
 
-const NoteContainer = styled.View`
+const NoteContainer = styled.TouchableOpacity`
     width: 100%;
     border: solid 1px ${Colors.black};
     padding: 10px;
+    marginBottom: 10px;
 `;
 
 const TitleText = styled.Text`
@@ -16,10 +17,11 @@ const TitleText = styled.Text`
     borderBottomColor: ${Colors.black};
     borderBottomWidth: 1px;
     fontSize: 28px;
+    maxHeight: 40px;
 `;
 
 const NoteText = styled.Text`
-    marginTop: 20px;
+    marginTop: 10px;
     width: 100%;
     maxHeight: 200px;
 `;
@@ -33,7 +35,7 @@ interface INoteViewProps {
 
 const Note: FC<INoteViewProps> = props => {
     return (
-        <NoteContainer style={{backgroundColor: props.color}}>
+        <NoteContainer style={{backgroundColor: props.color}} activeOpacity={0.9} >
             <TitleText>{props.title}</TitleText>
             <NoteText>{props.text}</NoteText>
         </NoteContainer>

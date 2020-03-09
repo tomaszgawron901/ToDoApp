@@ -9,7 +9,7 @@ const RoundButton = styled.TouchableOpacity`
     height: 85px;
     borderRadius: 50px;
     backgroundColor: ${Colors.yellow};
-    border: solid 1px ${Colors.black};
+    border: solid 3px ${Colors.black};
     display: flex;
     alignItems: center;
     justifyContent: center;
