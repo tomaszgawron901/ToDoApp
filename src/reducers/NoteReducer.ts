@@ -1,7 +1,8 @@
-import * as actionTypes from '../actions/types/note';
+import { dataActionTypes, viewActionTypes } from '../actions/types';
 import NoteColors from '../constans/NoteColors';
 import ViewReducer, { IViewsState } from './NoteViewReducer';
 import DataReducer, {IDataState} from './NoteDataReducer';
+import { combineReducers } from 'redux';
 
 export interface INoteState {
     id: number;
@@ -9,21 +10,20 @@ export interface INoteState {
     viewState: IViewsState;
 }
 
-export const Notes = (state: INoteState[] = [], action: any): INoteState[] => {
+export default (state: INoteState[] = [], action: any): INoteState[] => {
     switch (action.type) {
-        case actionTypes.ADD_TODO: {
+        case dataActionTypes.ADD_TODO: {
             return [
                 ...state,
                 {
                     id: action.id,
                     dataState: DataReducer(undefined, action),
                     viewState: ViewReducer(undefined, action)
-
                 }
 
             ];
         }
-        case actionTypes.UPDATE_TODO: {
+        case dataActionTypes.UPDATE_TODO: {
             return state.map( note => {
                 if (note.id === action.id) {
                     return {
@@ -34,15 +34,26 @@ export const Notes = (state: INoteState[] = [], action: any): INoteState[] => {
                 return note;
             });
         }
-        case actionTypes.DEL_TODO: {
-            const index: number = state.indexOf(action.id, 0);
-            if (index !== -1) {
-                return [
-                    ...state.slice(0, index),
-                    ...state.slice(index + 1)
-                ];
-            }
-            return state;
+        case dataActionTypes.DEL_TODO: {
+            let stateAfter = [];
+            state.forEach(note => {
+                if (note.id !== action.id) {
+                    stateAfter = [ ...stateAfter, note ];
+                }
+            });
+
+            return stateAfter;
+        }
+        case dataActionTypes.SET_VIEW: {
+            return state.map( note => {
+                if (note.id === action.id) {
+                    return {
+                        ...note,
+                        viewState: ViewReducer(note.viewState, {type: action.viewType})
+                    };
+                }
+                return note;
+            });
         }
         default: {
             return state;

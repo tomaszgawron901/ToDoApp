@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/types/view';
+import { viewActionTypes } from '../actions/types';
 
 export interface IViewsState {
     isClosed: boolean;
@@ -12,17 +12,17 @@ const defaultState = (): IViewsState => (
 
 export default (state = defaultState(), action: any): IViewsState => {
     switch (action.type) {
-        case actionTypes.CHANGE_VIEW: {
+        case viewActionTypes.INVERSE_VIEW: {
             return {
-                isClosed: !action.isClosed
+                isClosed: !state.isClosed
             };
         }
-        case actionTypes.SET_CLOSED: {
+        case viewActionTypes.SET_CLOSED: {
             return {
                 isClosed: true
             };
         }
-        case actionTypes.SET_OPENED: {
+        case viewActionTypes.SET_OPENED: {
             return {
                 isClosed: false
             };

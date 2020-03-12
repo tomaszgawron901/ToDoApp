@@ -1,9 +1,11 @@
 import React, { FC, Component } from 'react';
-import { Text, DatePickerAndroid, View } from 'react-native';
 import styled from 'styled-components/native';
 
 import Colors from '../../constans/Colors';
-import NoteColors from '../../constans/NoteColors';
+import store from '../../tools/store';
+import {setView} from '../../actions/actions';
+import {viewActionTypes} from '../../actions/types';
+import {INoteState}from '../../reducers/NoteReducer';
 
 const NoteContainer = styled.TouchableOpacity`
     width: 100%;
@@ -30,26 +32,21 @@ const DateText = styled.Text`
     alignSelf: flex-end;
 `;
 
-interface INoteViewProps {
-    title: string;
-    text: string;
-    color: NoteColors;
+interface INoteProps {
+    note: INoteState;
 }
 
-class Note extends React.PureComponent<INoteViewProps> {
-    readonly state = {minimalized: false };
-    readonly date = new Date();
-
-    _changeSize() {
-        this.setState({minimalized: !this.state.minimalized });
+class Note extends React.PureComponent<INoteProps> {
+    _onPress() {
+        store.dispatch(setView(this.props.note.id, viewActionTypes.INVERSE_VIEW));
     }
 
     render() {
         return (
-            <NoteContainer style={{backgroundColor: this.props.color}} activeOpacity={0.9} onPress={() => {this._changeSize(); }} >
-                <TitleText>{this.props.title}</TitleText>
-                <NoteText style={this.state.minimalized ? {maxHeight: undefined} : {maxHeight: 250}}>{this.props.text}</NoteText>
-                <DateText>{this.date.toLocaleDateString()}</DateText>
+            <NoteContainer style={{backgroundColor: this.props.note.dataState.color}} activeOpacity={0.9} onPress={() => { this._onPress(); }} >
+                <TitleText>{this.props.note.dataState.title}</TitleText>
+                <NoteText style={this.props.note.viewState.isClosed ? {maxHeight: 250} : {maxHeight: undefined}}>{this.props.note.dataState.text}</NoteText>
+                <DateText>{this.props.note.dataState.date.toLocaleDateString()}</DateText>
             </NoteContainer>
         );
     }

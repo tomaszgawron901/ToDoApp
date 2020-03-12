@@ -2,11 +2,13 @@ import React, { FC } from 'react';
 import { SafeAreaView, Platform, StatusBar, ScrollView, View } from 'react-native';
 import styled from 'styled-components/native';
 
-import AddButton from './screens/todoList/AddButton';
-import NoteList from './screens/todoList/NoteList';
 import Colors from './constans/Colors';
+import store from './tools/store';
+import NoteList from './screens/todoList/NoteList';
+import AddButton from './screens/todoList/AddButton';
 
-interface IMainProps { }
+interface IMainProps {
+}
 
 const MainAreaView = styled.View`
     display: flex;
@@ -14,12 +16,12 @@ const MainAreaView = styled.View`
     flex: 1;
 `;
 
-const Main: FC<IMainProps> = props => {
+const Main: FC<IMainProps> = () => {
     return (
         <MainAreaView>
             {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
-            <NoteList/>
-            <AddButton></AddButton>
+            <NoteList notes={store.getState()} />
+            <AddButton />
         </MainAreaView>
     );
 };

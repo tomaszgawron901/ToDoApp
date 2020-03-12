@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/types/note';
+import {dataActionTypes} from '../actions/types';
 import NoteColors from '../constans/NoteColors';
 
 export interface IDataState {
@@ -8,9 +8,16 @@ export interface IDataState {
     date: Date;
 }
 
-export default (state: IDataState, action: any): IDataState => {
+const defaultState = (): IDataState => ({
+    title: '',
+    text: '',
+    color: NoteColors.white,
+    date: new Date(0)
+});
+
+export default (state: IDataState = defaultState(), action: any): IDataState => {
     switch (action.type) {
-        case actionTypes.ADD_TODO: {
+        case dataActionTypes.ADD_TODO: {
             return {
                 title: '',
                 text: '',
@@ -18,7 +25,7 @@ export default (state: IDataState, action: any): IDataState => {
                 date: action.date
             };
         }
-        case actionTypes.UPDATE_TODO: {
+        case dataActionTypes.UPDATE_TODO: {
             return {
                 ...state,
                 title: action.title,
