@@ -1,11 +1,11 @@
 import React, { FC, Component } from 'react';
 import styled from 'styled-components/native';
+import { connect } from 'react-redux';
 
 import Colors from '../constans/Colors';
 import {setView} from '../actions/actions';
 import {viewActionTypes} from '../actions/types';
 import {INoteState}from '../reducers/NoteReducer';
-import store from '../tools/store';
 
 const NoteContainer = styled.TouchableOpacity`
     width: 100%;
@@ -32,18 +32,29 @@ const DateText = styled.Text`
     alignSelf: flex-end;
 `;
 
-let Note: FC<INoteState> = props => {
-    const _onPress = () => {
-        store.dispatch(setView(props.id, viewActionTypes.INVERSE_VIEW));
-    };
+const mapStateToProps = () => {
+    return {};
+};
 
+const mapDispatchToProp = ( dispatch ) => {
+    return {
+        onPress: (id: number) => dispatch(setView(id, viewActionTypes.INVERSE_VIEW))
+    };
+};
+
+interface INoteProps {
+    note: INoteState;
+    onPress: Function;
+}
+
+const Note: FC<INoteProps> = props => {
     return (
-        <NoteContainer style={{backgroundColor: props.dataState.color}} activeOpacity={0.9} onPress={() => { _onPress(); }} >
-            <TitleText>{props.dataState.title}</TitleText>
-            <NoteText style={props.viewState.isClosed ? {maxHeight: 250} : {maxHeight: undefined}}>{props.dataState.text}</NoteText>
-            <DateText>{props.dataState.date.toLocaleDateString()}</DateText>
+        <NoteContainer style={{backgroundColor: props.note.dataState.color}} activeOpacity={0.9} onPress={() => { props.onPress(props.note.id); }} >
+            <TitleText>{props.note.dataState.title}</TitleText>
+            <NoteText style={props.note.viewState.isClosed ? {maxHeight: 250} : {maxHeight: undefined}}>{props.note.dataState.text}</NoteText>
+            <DateText>{props.note.dataState.date.toLocaleDateString()}</DateText>
         </NoteContainer>
     );
 };
 
-export default Note;
+export default connect(mapStateToProps, mapDispatchToProp)(Note);

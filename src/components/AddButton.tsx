@@ -21,19 +21,26 @@ const RoundButton = styled.TouchableOpacity`
     opacity: 0.90;
 `;
 
+const mapStateToProps = () => {
+    return {};
+};
+
+const mapDispatchToProp = ( dispatch ) => {
+    return {
+        onPress: () => dispatch(addNote())
+    };
+};
+
 interface IAddButtonProps {
-    dispatch: Function;
+    onPress: Function;
 }
 
-let AddButton: FC<IAddButtonProps> = ({ dispatch }) => {
+let AddButton: FC<IAddButtonProps> = props => {
     return (
-        <RoundButton activeOpacity={1} onPress={ () => {dispatch(addNote());
-        } } >
+        <RoundButton activeOpacity={1} onPress={ () => { props.onPress(); }} >
             <Text style={{fontSize: 50}}>+</Text>
         </RoundButton>
     );
 };
 
-AddButton = connect()(AddButton);
-
-export default AddButton;
+export default connect(mapStateToProps, mapDispatchToProp)(AddButton);
