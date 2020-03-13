@@ -2,7 +2,6 @@ import React, { FC, Component } from 'react';
 import styled from 'styled-components/native';
 
 import Colors from '../constans/Colors';
-import store from '../tools/store';
 import {setView} from '../actions/actions';
 import {viewActionTypes} from '../actions/types';
 import {INoteState}from '../reducers/NoteReducer';
@@ -32,16 +31,20 @@ const DateText = styled.Text`
     alignSelf: flex-end;
 `;
 
-const Note: FC<INoteState> = props => {
+interface INoteProps extends INoteState {
+    dispatch: Function;
+}
+
+let Note: FC<INoteProps> = ( { text, dispatch } ) => {
     const _onPress = () => {
-        store.dispatch(setView(props.id, viewActionTypes.INVERSE_VIEW));
+        dispatch(setView(note.id, viewActionTypes.INVERSE_VIEW));
     };
 
     return (
-        <NoteContainer style={{backgroundColor: props.dataState.color}} activeOpacity={0.9} onPress={() => { _onPress(); }} >
-            <TitleText>{props.dataState.title}</TitleText>
-            <NoteText style={props.viewState.isClosed ? {maxHeight: 250} : {maxHeight: undefined}}>{props.dataState.text}</NoteText>
-            <DateText>{props.dataState.date.toLocaleDateString()}</DateText>
+        <NoteContainer style={{backgroundColor: note.dataState.color}} activeOpacity={0.9} onPress={() => { _onPress(); }} >
+            <TitleText>{note.dataState.title}</TitleText>
+            <NoteText style={note.viewState.isClosed ? {maxHeight: 250} : {maxHeight: undefined}}>{note.dataState.text}</NoteText>
+            <DateText>{note.dataState.date.toLocaleDateString()}</DateText>
         </NoteContainer>
     );
 };

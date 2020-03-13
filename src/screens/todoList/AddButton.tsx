@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Text } from 'react-native';
 import styled from 'styled-components/native';
 
-import Colors from '../constans/Colors';
-import store from '../tools/store';
-import {addNote} from '../actions/actions';
+import Colors from '../../constans/Colors';
+import store from '../../tools/store';
+import {addNote} from '../../actions/actions';
 
 const RoundButton = styled.TouchableOpacity`
     width: 85px;
@@ -21,13 +21,15 @@ const RoundButton = styled.TouchableOpacity`
     opacity: 0.90;
 `;
 
-const AddButton: FC = () => {
-    return (
-        <RoundButton activeOpacity={1} onPress={ () => {store.dispatch(addNote());
-        } } >
-            <Text style={{fontSize: 50}}>+</Text>
-        </RoundButton>
-    );
-};
+class AddButton extends React.PureComponent {
+    render() {
+        return (
+            <RoundButton activeOpacity={1} onPress={ () => {store.dispatch(addNote());
+            } } >
+                <Text style={{fontSize: 50}}>+</Text>
+            </RoundButton>
+        );
+    }
+}
 
 export default AddButton;
