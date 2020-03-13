@@ -4,8 +4,7 @@ import styled from 'styled-components/native';
 
 import Colors from './constans/Colors';
 import store from './tools/store';
-import NoteList from './screens/todoList/NoteList';
-import AddButton from './screens/todoList/AddButton';
+import TodoApp from './screens/TodoApp';
 
 interface IMainProps {
 }
@@ -20,8 +19,7 @@ const Main: FC<IMainProps> = () => {
     return (
         <MainAreaView>
             {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
-            <NoteList notes={store.getState()} />
-            <AddButton />
+            <TodoApp />
         </MainAreaView>
     );
 };

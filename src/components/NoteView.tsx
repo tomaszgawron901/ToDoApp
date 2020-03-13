@@ -5,6 +5,7 @@ import Colors from '../constans/Colors';
 import {setView} from '../actions/actions';
 import {viewActionTypes} from '../actions/types';
 import {INoteState}from '../reducers/NoteReducer';
+import store from '../tools/store';
 
 const NoteContainer = styled.TouchableOpacity`
     width: 100%;
@@ -31,20 +32,16 @@ const DateText = styled.Text`
     alignSelf: flex-end;
 `;
 
-interface INoteProps extends INoteState {
-    dispatch: Function;
-}
-
-let Note: FC<INoteProps> = ( { text, dispatch } ) => {
+let Note: FC<INoteState> = props => {
     const _onPress = () => {
-        dispatch(setView(note.id, viewActionTypes.INVERSE_VIEW));
+        store.dispatch(setView(props.id, viewActionTypes.INVERSE_VIEW));
     };
 
     return (
-        <NoteContainer style={{backgroundColor: note.dataState.color}} activeOpacity={0.9} onPress={() => { _onPress(); }} >
-            <TitleText>{note.dataState.title}</TitleText>
-            <NoteText style={note.viewState.isClosed ? {maxHeight: 250} : {maxHeight: undefined}}>{note.dataState.text}</NoteText>
-            <DateText>{note.dataState.date.toLocaleDateString()}</DateText>
+        <NoteContainer style={{backgroundColor: props.dataState.color}} activeOpacity={0.9} onPress={() => { _onPress(); }} >
+            <TitleText>{props.dataState.title}</TitleText>
+            <NoteText style={props.viewState.isClosed ? {maxHeight: 250} : {maxHeight: undefined}}>{props.dataState.text}</NoteText>
+            <DateText>{props.dataState.date.toLocaleDateString()}</DateText>
         </NoteContainer>
     );
 };
