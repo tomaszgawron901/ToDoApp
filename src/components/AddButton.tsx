@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Text } from 'react-native';
 import styled from 'styled-components/native';
-import { connect } from 'react-redux';
 
 import Colors from '../constans/Colors';
+import store from '../tools/store';
 import {addNote} from '../actions/actions';
 
 const RoundButton = styled.TouchableOpacity`
@@ -21,19 +21,13 @@ const RoundButton = styled.TouchableOpacity`
     opacity: 0.90;
 `;
 
-interface IAddButtonProps {
-    dispatch: Function;
-}
-
-let AddButton: FC<IAddButtonProps> = ({ dispatch }) => {
+const AddButton: FC = () => {
     return (
-        <RoundButton activeOpacity={1} onPress={ () => {dispatch(addNote());
+        <RoundButton activeOpacity={1} onPress={ () => {store.dispatch(addNote());
         } } >
             <Text style={{fontSize: 50}}>+</Text>
         </RoundButton>
     );
 };
-
-AddButton = connect()(AddButton);
 
 export default AddButton;

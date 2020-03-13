@@ -13,12 +13,14 @@ export interface INoteState {
 export default (state: INoteState[] = [], action: any): INoteState[] => {
     switch (action.type) {
         case dataActionTypes.ADD_TODO: {
-            return [                {
-                id: action.id,
-                dataState: DataReducer(undefined, action),
-                viewState: ViewReducer(undefined, action)
-            },
-                ...state
+            return [
+                ...state,
+                {
+                    id: action.id,
+                    dataState: DataReducer(undefined, action),
+                    viewState: ViewReducer(undefined, action)
+                }
+
             ];
         }
         case dataActionTypes.UPDATE_TODO: {

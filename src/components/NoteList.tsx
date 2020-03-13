@@ -1,27 +1,40 @@
 import React, { FC } from 'react';
 import {ScrollView, View, Text } from 'react-native';
-import { connect } from 'react-redux';
 
 import Note from './NoteView';
 import {INoteState}from '../reducers/NoteReducer';
+import NoteColors from '../constans/NoteColors';
+import store from '../tools/store';
+import { addNote } from '../actions/actions';
 
 interface INoteListProps {
     notes: INoteState[];
 }
 
-let NoteList: FC<INoteListProps> = ( {notes} ) => {
+const test = {
+    id: 1,
+    dataState: {
+        title: '',
+        text: '',
+        color: NoteColors.blue,
+        date: new Date()
+    },
+    viewState: {
+        isClosed: true
+    }
+};
+
+const NoteList: FC<INoteListProps> = props => {
     return (
         <ScrollView style={{flex: 1, padding: 15, paddingTop: 40}}>
             <View style={{paddingBottom: 40}}>
                 {
-                    notes.map( note => {
-                        return <Note note={note} dispatch={dispatch} key={note.id} />;
+                    props.notes.map( note => {
+                        return <Note {...note} key={note.id} />;
                     })
                 }
             </View>
         </ScrollView> );
 };
-
-NoteList = connect()(NoteList);
 
 export default NoteList;
