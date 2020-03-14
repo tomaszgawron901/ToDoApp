@@ -1,4 +1,4 @@
-import {dataActionTypes, viewActionTypes} from './types';
+import {dataActionTypes} from './types';
 
 let nextID = 0;
 
@@ -16,10 +16,4 @@ export const delNote = (id: number) => ({
 export const updateNote = (id: number) => ({
     type: dataActionTypes.UPDATE_TODO,
     id: id  // TODO
-});
-
-export const setView = (id: number, viewType: viewActionTypes) => ({
-    type: dataActionTypes.SET_VIEW,
-    id: id,
-    viewType: viewType
 });

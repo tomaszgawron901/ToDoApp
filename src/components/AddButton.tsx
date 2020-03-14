@@ -43,4 +43,4 @@ let AddButton: FC<IAddButtonProps> = props => {
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProp)(AddButton);
+export default connect(undefined, mapDispatchToProp)(AddButton);

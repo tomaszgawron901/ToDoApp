@@ -2,19 +2,16 @@ import React, { FC } from 'react';
 import {ScrollView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import Note from './NoteView';
-import {INoteState}from '../reducers/NoteReducer';
-import NoteColors from '../constans/NoteColors';
-import { addNote } from '../actions/actions';
+import Note from './Note';
 
 const mapStateToProps = ( state ) => {
     return {
-        notes: state
+        notesID: state.notesID
     };
 };
 
 interface INoteListProps {
-    notes: INoteState[];
+    notesID: number[];
 }
 
 const NoteList: FC<INoteListProps> = (props) => {
@@ -22,8 +19,8 @@ const NoteList: FC<INoteListProps> = (props) => {
         <ScrollView style={{flex: 1, padding: 15, paddingTop: 40}}>
             <View style={{paddingBottom: 40}}>
                 {
-                    props.notes.map( note => {
-                        return <Note note={note} key={note.id}/>;
+                    props.notesID.map( id => {
+                        return <Note  id={id} key={id}/>;
                     })
                 }
             </View>
