@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - DelButton added to note.
     - TodoEdit site created.
     - TodoEdit site Head component added.
+    - TodoEdit main component added.
 
 
 ## [0.0.6] - 2020-03-14

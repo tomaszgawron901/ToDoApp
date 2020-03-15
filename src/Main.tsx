@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import Colors from './constans/Colors';
 import store from './tools/store';
 import TodoApp from './screens/TodoApp';
+import TodoEdit from './screens/TodoEdit';
 
 interface IMainProps {
 }
@@ -19,7 +20,7 @@ const Main: FC<IMainProps> = () => {
     return (
         <MainAreaView>
             {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
-            <TodoApp />
+            <TodoEdit />
         </MainAreaView>
     );
 };

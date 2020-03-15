@@ -59,7 +59,7 @@ interface INoteProps {
 
 const Note: FC<INoteProps> = props => {
     return (
-        <NoteContainer style={{backgroundColor: props.note.color}} activeOpacity={0.9} onPress={() => { props.onPress(); }} >
+        <NoteContainer style={{backgroundColor: props.note.color}} activeOpacity={0.9} onLongPress={() => { props.onPress(); }} >
             <HeadContainer>
                 <TitleText numberOfLines={1} >{props.note.title}</TitleText>
                 <View style={{marginLeft: -30}}>
