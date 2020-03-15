@@ -16,8 +16,8 @@ const notesIDReducer = (state: number[] = [], action: any): number[] => {
     switch (action.type) {
         case dataActionTypes.ADD_TODO: {
             return [
-                ...state,
-                action.id
+                action.id,
+                ...state
             ];
         }
         case dataActionTypes.UPDATE_TODO: {

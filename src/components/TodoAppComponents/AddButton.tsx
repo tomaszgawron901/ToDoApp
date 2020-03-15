@@ -3,8 +3,8 @@ import { Text } from 'react-native';
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 
-import Colors from '../constans/Colors';
-import {addNote} from '../actions/actions';
+import Colors from '../../constans/Colors';
+import {addNote} from '../../actions/actions';
 
 const RoundButton = styled.TouchableOpacity`
     width: 85px;
@@ -20,10 +20,6 @@ const RoundButton = styled.TouchableOpacity`
     right: 50px;
     opacity: 0.90;
 `;
-
-const mapStateToProps = () => {
-    return {};
-};
 
 const mapDispatchToProp = ( dispatch ) => {
     return {

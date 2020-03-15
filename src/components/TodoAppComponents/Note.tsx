@@ -2,9 +2,11 @@ import React, { FC, Component } from 'react';
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 
-import Colors from '../constans/Colors';
-import {updateNote} from '../actions/actions';
-import {IDataState} from '../reducers/NoteDataReducer';
+import Colors from '../../constans/Colors';
+import {delNote} from '../../actions/actions';
+import {IDataState} from '../../reducers/NoteDataReducer';
+import { View } from 'react-native';
+import DelButton from './DelButton';
 
 const NoteContainer = styled.TouchableOpacity`
     width: 100%;
@@ -14,11 +16,9 @@ const NoteContainer = styled.TouchableOpacity`
 `;
 
 const TitleText = styled.Text`
-    width: 100%;
-    borderBottomColor: ${Colors.black};
-    borderBottomWidth: 1px;
+flexGrow: 1;
     fontSize: 28px;
-    maxHeight: 40px;
+    marginRight: 40px;
 `;
 
 const NoteText = styled.Text`
@@ -31,18 +31,28 @@ const DateText = styled.Text`
     alignSelf: flex-end;
 `;
 
+const HeadContainer = styled.View`
+    borderBottomColor: ${Colors.black};
+    borderBottomWidth: 1px;
+    flexDirection: row;
+`;
+
 const mapStateToProps = ( state, ownProps ) => {
-    return { note: state.notesByID[ownProps.id] };
+    return {
+        id: ownProps.id,
+        note: state.notesByID[ownProps.id]
+    };
 };
 
 const mapDispatchToProp = ( dispatch, ownProps ) => {
     return {
-        onPress: () => {console.log(ownProps.id);
+        onPress: () => { console.log('TODO');  // TODO
         }
     };
 };
 
 interface INoteProps {
+    id: number;
     note: IDataState;
     onPress: Function;
 }
@@ -50,7 +60,12 @@ interface INoteProps {
 const Note: FC<INoteProps> = props => {
     return (
         <NoteContainer style={{backgroundColor: props.note.color}} activeOpacity={0.9} onPress={() => { props.onPress(); }} >
-            <TitleText>{props.note.title}</TitleText>
+            <HeadContainer>
+                <TitleText numberOfLines={1} >{props.note.title}</TitleText>
+                <View style={{marginLeft: -30}}>
+                    <DelButton id={props.id}/>
+                </View>
+            </HeadContainer>
             <NoteText>{props.note.text}</NoteText>
             <DateText>{props.note.date.toLocaleDateString()}</DateText>
         </NoteContainer>

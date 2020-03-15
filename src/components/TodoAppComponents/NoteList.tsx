@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import {ScrollView, View, Text } from 'react-native';
+import {ScrollView, View} from 'react-native';
 import { connect } from 'react-redux';
 
 import Note from './Note';
@@ -10,7 +10,7 @@ const mapStateToProps = ( state ) => {
     };
 };
 
-interface INoteListProps {
+export interface INoteListProps {
     notesID: number[];
 }
 
@@ -19,9 +19,7 @@ const NoteList: FC<INoteListProps> = (props) => {
         <ScrollView style={{flex: 1, padding: 15, paddingTop: 40}}>
             <View style={{paddingBottom: 40}}>
                 {
-                    props.notesID.map( id => {
-                        return <Note  id={id} key={id}/>;
-                    })
+                    props.notesID.map( id => <Note  id={id} key={id}/>)
                 }
             </View>
         </ScrollView> );
