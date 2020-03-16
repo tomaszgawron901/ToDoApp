@@ -4,22 +4,24 @@ import { connect } from 'react-redux';
 
 import Note from './Note';
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = ( state, {onElementPress} ) => {
     return {
-        notesID: state.notesID
+        notesID: state.notesID,
+        onElementPress: onElementPress
     };
 };
 
 export interface INoteListProps {
     notesID: number[];
+    onElementPress: Function
 }
 
 const NoteList: FC<INoteListProps> = (props) => {
     return (
-        <ScrollView style={{flex: 1, padding: 15, paddingTop: 40}}>
-            <View style={{paddingBottom: 40}}>
+        <ScrollView style={{flex: 1, padding: 15}}>
+            <View style={{paddingBottom: 20}}>
                 {
-                    props.notesID.map( id => <Note  id={id} key={id}/>)
+                    props.notesID.map( id => <Note  id={id} onPress={props.onElementPress} key={id}/>)
                 }
             </View>
         </ScrollView> );

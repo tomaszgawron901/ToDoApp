@@ -6,49 +6,6 @@ import { connect } from 'react-redux';
 import Colors from '../../../constans/Colors';
 import NoteColors from '../../../constans/NoteColors';
 
-const CustomButtomContainer = styled.TouchableOpacity`
-    width: 70px;
-    height: 70px;
-    backgroundColor: ${Colors.yellow};
-    border: solid 3px ${Colors.black};
-    display: flex;
-    alignItems: center;
-    justifyContent: center;
-    margin: 5px;
-    opacity: 0.80;
-    borderRadius: 5px;
-`;
-
-const BackButtonText = styled.Text`
-    marginTop: -35px;
-    marginLeft: -12px;
-    fontSize: 90px;
-`;
-
-const DeleteButtonText = styled.Text`
-    fontSize: 60px;
-`;
-
-export interface ICustomButtomProps {
-    onPress: Function;
-}
-
-export const BackButton: FC<ICustomButtomProps> = props => {
-    return (
-        <CustomButtomContainer activeOpacity={1} onPress={props.onPress}>
-            <BackButtonText>←</BackButtonText>
-        </CustomButtomContainer>
-    );
-};
-
-export const DeleteButton: FC<ICustomButtomProps> = props => {
-    return (
-        <CustomButtomContainer activeOpacity={1} onPress={props.onPress}>
-            <DeleteButtonText>X</DeleteButtonText>
-        </CustomButtomContainer>
-    );
-};
-
 export class ColorPicker extends React.PureComponent<{ selectedColor: NoteColors}> {
     state: { color: string } = {color: 'white'};
 

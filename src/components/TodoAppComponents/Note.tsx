@@ -44,22 +44,15 @@ const mapStateToProps = ( state, ownProps ) => {
     };
 };
 
-const mapDispatchToProp = ( dispatch, ownProps ) => {
-    return {
-        onPress: () => { console.log('TODO');  // TODO
-        }
-    };
-};
-
 interface INoteProps {
     id: number;
-    note: IDataState;
-    onPress: Function;
+    note: IDataState,
+    onPress: Function
 }
 
 const Note: FC<INoteProps> = props => {
     return (
-        <NoteContainer style={{backgroundColor: props.note.color}} activeOpacity={0.9} onLongPress={() => { props.onPress(); }} >
+        <NoteContainer style={{backgroundColor: props.note.color}} activeOpacity={0.9} onLongPress={() => { props.onPress(props.id); }} >
             <HeadContainer>
                 <TitleText numberOfLines={1} >{props.note.title}</TitleText>
                 <View style={{marginLeft: -30}}>
@@ -72,4 +65,4 @@ const Note: FC<INoteProps> = props => {
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProp)(Note);
+export default connect(mapStateToProps, undefined)(Note);

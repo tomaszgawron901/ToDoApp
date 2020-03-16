@@ -7,6 +7,11 @@ import store from './tools/store';
 import TodoApp from './screens/TodoApp';
 import TodoEdit from './screens/TodoEdit';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator} from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
 interface IMainProps {
 }
 
@@ -18,10 +23,12 @@ const MainAreaView = styled.View`
 
 const Main: FC<IMainProps> = () => {
     return (
-        <MainAreaView>
-            {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
-            <TodoApp/>
-        </MainAreaView>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name='Main' component={TodoApp} />
+                <Stack.Screen name='edit' component={TodoEdit} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 };
 
