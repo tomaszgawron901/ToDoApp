@@ -20,7 +20,7 @@ const Main: FC<IMainProps> = () => {
     return (
         <MainAreaView>
             {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
-            <TodoEdit />
+            <TodoApp/>
         </MainAreaView>
     );
 };
