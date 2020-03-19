@@ -1,4 +1,5 @@
 import {dataActionTypes} from './types';
+import { IDataState } from '../reducers/NoteDataReducer';
 
 let nextID = 0;
 
@@ -13,7 +14,8 @@ export const delNote = (id: number) => ({
     id: id
 });
 
-export const updateNote = (id: number) => ({
+export const updateNote = (id: number, note: IDataState) => ({
     type: dataActionTypes.UPDATE_TODO,
-    id: id  // TODO
+    id: id,
+    ...note
 });

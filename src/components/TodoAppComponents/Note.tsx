@@ -7,6 +7,7 @@ import {delNote} from '../../actions/actions';
 import {IDataState} from '../../reducers/NoteDataReducer';
 import { View } from 'react-native';
 import DelButton from './DelButton';
+import NoteColors from '../../constans/NoteColors';
 
 const NoteContainer = styled.TouchableOpacity`
     width: 100%;
@@ -52,7 +53,7 @@ interface INoteProps {
 
 const Note: FC<INoteProps> = props => {
     return (
-        <NoteContainer style={{backgroundColor: props.note.color}} activeOpacity={0.9} onLongPress={() => { props.onPress(props.id); }} >
+        <NoteContainer style={{backgroundColor: NoteColors[props.note.color]}} activeOpacity={0.9} onLongPress={() => { props.onPress(props.id); }} >
             <HeadContainer>
                 <TitleText numberOfLines={1} >{props.note.title}</TitleText>
                 <View style={{marginLeft: -30}}>

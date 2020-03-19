@@ -8,7 +8,7 @@ import  Colors  from '../../constans/Colors';
 const TodoApp: FC<{navigation}> = props => {
         return (
             <View style={{flex: 1, backgroundColor: Colors.darkGray}}>
-                <NoteList onElementPress={(noteID: number) => { props.navigation.navigate('edit', noteID); }} />
+                <NoteList onElementPress={(noteID: number) => { props.navigation.navigate('edit', {noteID: noteID}); }} />
                 <AddButton />
             </View>
         );

@@ -4,14 +4,14 @@ import NoteColors from '../constans/NoteColors';
 export interface IDataState {
     title: string;
     text: string;
-    color: NoteColors;
+    color: string;
     date: Date;
 }
 
 const defaultState = (): IDataState => ({
     title: '',
     text: '',
-    color: NoteColors.white,
+    color: 'white',
     date: new Date(0)
 });
 
@@ -21,7 +21,7 @@ export default (state: IDataState = defaultState(), action: any): IDataState => 
             return {
                 title: '',
                 text: '',
-                color: NoteColors.white,
+                color: 'white',
                 date: action.date
             };
         }

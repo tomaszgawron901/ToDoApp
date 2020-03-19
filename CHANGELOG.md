@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] - 2020-03-16
+
+### Changes
+
+    - NoteEditor refactored.
+    - actions refactored
+
+
+### Added
+
+    - new ColorPicker Component.
+    - tab bottom navigation added.
+    - screen1, screen2 added
+
+
+## [0.0.8] - 2020-03-16
+
+### Changes
+
+    - EditSite Head components ( BackButton, DelButton ) removed.
+    - EditSite Head removed.
+
+
+### Added
+
+    - navigation between TodoApp screen and TodoEdit screen added.
+
 
 ## [0.0.7] - 2020-03-15
 
