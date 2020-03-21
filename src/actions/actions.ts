@@ -1,11 +1,13 @@
 import {dataActionTypes} from './types';
 import { IDataState } from '../reducers/NoteDataReducer';
 
-let nextID = 0;
+let _curentID: number = -1;
+
+export const curentID = () => _curentID;
 
 export const addNote = () => ({
     type: dataActionTypes.ADD_TODO,
-    id: nextID++,
+    id: ++_curentID,
     date: new Date()
 });
 

@@ -13,8 +13,6 @@ export interface INoteEditorProps {
 }
 
 const NoteEditor: FC<INoteEditorProps> = props => {
-    const [title, setTitle] = useState(props.title);
-    const [text, setText] = useState(props.text);
 
     return (
         <View >
@@ -23,10 +21,10 @@ const NoteEditor: FC<INoteEditorProps> = props => {
                 borderBottomColor: Colors.black,
                 borderBottomWidth: 1,
                 borderStyle: 'solid' }}>
-                <TextInput value={props.title} style={{fontSize: 30}} onChangeText={ value => {setTitle(value); }}/>
+                <TextInput value={props.title} style={{fontSize: 30}} onChangeText={ value => {props.onChange({title: value}); }}/>
             </View>
             <View style={{marginTop: 20}}>
-                <TextInput value={props.text} multiline={true} textAlignVertical={'top'} style={{fontSize: 20, minHeight: 150}} onChangeText={ value => {setText(value); }}/>
+                <TextInput value={props.text} multiline={true} textAlignVertical={'top'} style={{fontSize: 20, minHeight: 150}} onChangeText={ value => {props.onChange({text: value}); }}/>
             </View>
 
         </View>

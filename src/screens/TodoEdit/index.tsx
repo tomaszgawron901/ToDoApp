@@ -52,7 +52,7 @@ const TodoEdit: FC<ITodoEditProps> = ({noteID, note, dispach}) => {
                     padding: 10,
                     backgroundColor: NoteColors[note.color]
                 }}>
-                    <NoteEditor text={note.text} title={note.title} onChange={(title: string, text: string) => { changeNote({title: title, text: text}); }}/>
+                    <NoteEditor text={note.text} title={note.title} onChange={ changes => {changeNote(changes); }}/>
                 </View>
             </ScrollView>
         </TodoEditArea >

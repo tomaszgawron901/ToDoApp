@@ -4,14 +4,31 @@ import NoteList from '../../components/TodoAppComponents/NoteList';
 import AddButton from '../../components/TodoAppComponents/AddButton';
 import { connect } from 'react-redux';
 import  Colors  from '../../constans/Colors';
+import { addNote, updateNote, curentID } from '../../actions/actions';
 
-const TodoApp: FC<{navigation}> = props => {
+const mapDispachToProps = dispach => {
+    return {
+        dispach: dispach
+    };
+};
+
+const TodoApp = props => {
+    const onAddButtonPress = () => {
+        const action = addNote();
+        props.dispach(action);
+        props.navigation.navigate('edit', {noteID: action.id});
+    };
+
+    const onNotePress = noteID => {
+        props.navigation.navigate('edit', {noteID: noteID});
+    };
+
         return (
             <View style={{flex: 1, backgroundColor: Colors.darkGray}}>
-                <NoteList onElementPress={(noteID: number) => { props.navigation.navigate('edit', {noteID: noteID}); }} />
-                <AddButton />
+                <NoteList onElementPress={onNotePress} />
+                <AddButton onPress={onAddButtonPress}/>
             </View>
         );
 };
 
-export default connect()(TodoApp);
+export default connect(undefined, mapDispachToProps)(TodoApp);
