@@ -17,7 +17,7 @@ const NoteContainer = styled.TouchableOpacity`
 `;
 
 const TitleText = styled.Text`
-flexGrow: 1;
+    flexGrow: 1;
     fontSize: 28px;
     marginRight: 40px;
 `;

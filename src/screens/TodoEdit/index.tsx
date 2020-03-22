@@ -40,20 +40,8 @@ const TodoEdit: FC<ITodoEditProps> = ({noteID, note, dispach}) => {
 
     return (
         <TodoEditArea >
-            <ColorPicker
-                selectedColor={note.color}
-                onChange={ (color) => { changeNote({color: color}); }} />
             <ScrollView style={{flex: 1}}>
-                <View style={{
-                    borderWidth: 1,
-                    borderStyle: 'solid',
-                    borderColor: Colors.black,
-                    margin: 10,
-                    padding: 10,
-                    backgroundColor: NoteColors[note.color]
-                }}>
-                    <NoteEditor text={note.text} title={note.title} onChange={ changes => {changeNote(changes); }}/>
-                </View>
+                <NoteEditor text={note.text} title={note.title} color={note.color} onChange={ changes => {changeNote(changes); }}/>
             </ScrollView>
         </TodoEditArea >
     );

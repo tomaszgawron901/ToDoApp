@@ -7,8 +7,9 @@ import Colors from '../../constans/Colors';
 import NoteColors from '../../constans/NoteColors';
 
 const ColorPickerContainer = styled.View`
-    height: 60px;
-    border: solid 3px ${Colors.black};
+    height: 50px;
+    width: 50px;
+    border: solid 1px ${Colors.black};
     borderRadius: 5px;
     marginTop: 5px;
     marginBottom: 5px;
