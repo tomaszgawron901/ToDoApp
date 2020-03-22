@@ -1,11 +1,11 @@
 import React, { FC, useState} from 'react';
-import { View, ScrollView} from 'react-native';
+import { View, ScrollView, Button} from 'react-native';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 import ColorPicker from '../../components/TodoEditComponents/ColorPicker';
 import Colors  from '../../constans/Colors';
 import { IDataState } from '../../reducers/NoteDataReducer';
-import {updateNote} from '../../actions/actions';
+import {updateNote, delNote} from '../../actions/actions';
 import NoteEditor from '../../components/TodoEditComponents/NoteEditor';
 import NoteColors from '../../constans/NoteColors';
 
@@ -30,13 +30,18 @@ const mapDispachToProps = (dispach) => {
 export interface ITodoEditProps {
     noteID: number,
     note: IDataState,
+    navigation: any,
     dispach: any
 }
 
-const TodoEdit: FC<ITodoEditProps> = ({noteID, note, dispach}) => {
+const TodoEdit: FC<ITodoEditProps> = ({noteID, note, dispach, navigation}) => {
     const changeNote = (noteChanges) => {
         dispach( updateNote(noteID, Object.assign( {}, note, noteChanges, {date: new Date()} ) ) );
     };
+
+    navigation.setOptions({
+        headerRight: () => ( <Button title={'Delete'} onPress={ () => { dispach(delNote(noteID)); navigation.goBack(); } }/> )
+      });
 
     return (
         <TodoEditArea >

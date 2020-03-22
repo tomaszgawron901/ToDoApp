@@ -7,9 +7,6 @@ import * as React from 'react';
 import store from './src/tools/store';
 import Main from './src/Main';
 
-store.subscribe( () => {console.log('-------------------\n', store.getState());
-} );
-
 export default function App() {
 
     const getContacts = () => {
