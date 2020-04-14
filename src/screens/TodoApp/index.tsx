@@ -23,12 +23,12 @@ const TodoApp = props => {
         props.navigation.navigate('edit', {noteID: noteID});
     };
 
-        return (
-            <View style={{flex: 1, backgroundColor: Colors.darkGray}}>
-                <NoteList onElementPress={onNotePress} />
-                <AddButton onPress={onAddButtonPress}/>
-            </View>
-        );
+    return (
+        <View style={{flex: 1, backgroundColor: Colors.darkGray}}>
+            <NoteList onElementPress={onNotePress} />
+            <AddButton onPress={onAddButtonPress}/>
+        </View>
+    );
 };
 
 export default connect(undefined, mapDispachToProps)(TodoApp);

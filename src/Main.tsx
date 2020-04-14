@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import Colors from './constans/Colors';
 import TodoApp from './screens/TodoApp';
 import TodoEdit from './screens/TodoEdit';
-import Screen1 from './screens/Screen1';
+import Home from './screens/Home';
 import Screen2 from './screens/Screen2';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -37,6 +37,30 @@ const TodoStack = () => {
     );
 };
 
+const HomeStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{
+            headerStyle: {
+                backgroundColor: Colors.yellow},
+            headerTintColor: Colors.black,
+            headerTitleStyle: {fontWeight: 'bold'}}}>
+            <Stack.Screen name='Home' component={Home}/>
+        </Stack.Navigator>
+    );
+};
+
+const Screen2Stack = () => {
+    return (
+        <Stack.Navigator screenOptions={{
+            headerStyle: {
+                backgroundColor: Colors.yellow},
+            headerTintColor: Colors.black,
+            headerTitleStyle: {fontWeight: 'bold'}}}>
+            <Stack.Screen name='Screen2' component={Screen2}/>
+        </Stack.Navigator>
+    );
+};
+
 const Main: FC<IMainProps> = () => {
     return (
         <NavigationContainer>
@@ -47,9 +71,9 @@ const Main: FC<IMainProps> = () => {
                 inactiveBackgroundColor: Colors.black,
                 labelStyle: {fontSize: 20, fontWeight: 'bold'},
                 tabStyle: {borderWidth: 1, borderStyle: 'solid', borderColor: Colors.darkGray}}}>
-                <Tab.Screen name='Screen1' component={Screen1} />
-                <Tab.Screen name='Screen2' component={Screen2} />
-                <Tab.Screen name='Todo' component={TodoStack} />
+                <Tab.Screen name='HomeStack' component={HomeStack} options={{title: 'Home'}}/>
+                <Tab.Screen name='Screen2Stack' component={Screen2Stack} options={{title: 'Screen2'}}/>
+                <Tab.Screen name='Todo' component={TodoStack}/>
             </Tab.Navigator>
 
         </NavigationContainer>
