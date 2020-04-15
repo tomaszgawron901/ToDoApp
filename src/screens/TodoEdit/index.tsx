@@ -8,10 +8,17 @@ import { IDataState } from '../../reducers/NoteDataReducer';
 import {updateNote, delNote} from '../../actions/actions';
 import NoteEditor from '../../components/TodoEditComponents/NoteEditor';
 import NoteColors from '../../constans/NoteColors';
+import { HeaderTitle } from '@react-navigation/stack';
 
 const TodoEditArea = styled.View`
     flex: 1;
     backgroundColor: ${Colors.darkGray}
+`;
+
+const HeaderButtonsContainer = styled.View`
+    width: 300px;
+    justifyContent: space-around;
+    flexDirection: row;
 `;
 
 const mapStateToProps = ( state, {route} ) => {
@@ -40,7 +47,13 @@ const TodoEdit: FC<ITodoEditProps> = ({noteID, note, dispach, navigation}) => {
     };
 
     navigation.setOptions({
-        headerRight: () => ( <Button title={'Delete'} onPress={ () => { dispach(delNote(noteID)); navigation.goBack(); } }/> )
+        headerLeft: () => (
+            <HeaderButtonsContainer>
+                <Button color={Colors.black} title={'Back'} onPress={ () => { navigation.goBack(); } }/>
+                <Button color={Colors.black} title={'Save & Back'} onPress={ () => { dispach(delNote(noteID)); navigation.goBack(); } }/>
+                <Button color={Colors.black} title={'Delete'} onPress={ () => { dispach(delNote(noteID)); navigation.goBack(); } }/>
+            </HeaderButtonsContainer>
+            )
       });
 
     return (
