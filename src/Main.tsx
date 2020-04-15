@@ -32,7 +32,7 @@ const TodoStack = () => {
             headerTintColor: Colors.black,
             headerTitleStyle: {fontWeight: 'bold'}}}>
             <Stack.Screen name='TodoApp' component={TodoApp} options={{title: 'TodoApp'}}/>
-            <Stack.Screen name='edit' component={TodoEdit} />
+            <Stack.Screen name='edit' component={TodoEdit} options={{title: ''}} />
         </Stack.Navigator>
     );
 };
