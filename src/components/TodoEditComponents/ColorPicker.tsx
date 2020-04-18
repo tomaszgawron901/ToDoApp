@@ -1,7 +1,6 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC} from 'react';
 import styled from 'styled-components/native';
 import { Text, Picker, View } from 'react-native';
-import { connect } from 'react-redux';
 
 import Colors from '../../constans/Colors';
 import NoteColors from '../../constans/NoteColors';
@@ -17,7 +16,7 @@ const ColorPickerContainer = styled.View`
 
 export interface IColorPickerProps {
     selectedColor: string,
-    onChange: Function
+    onChange(newColor: string): void
 }
 
 const ColorPicker: FC<IColorPickerProps> = ({selectedColor, onChange}) => {
