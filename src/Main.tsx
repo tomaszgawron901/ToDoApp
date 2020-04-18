@@ -73,7 +73,7 @@ const Main: FC<IMainProps> = () => {
                 tabStyle: {borderWidth: 1, borderStyle: 'solid', borderColor: Colors.darkGray}}}>
                 <Tab.Screen name='HomeStack' component={HomeStack} options={{title: 'Home'}}/>
                 <Tab.Screen name='Screen2Stack' component={Screen2Stack} options={{title: 'Screen2'}}/>
-                <Tab.Screen name='Todo' component={TodoStack}/>
+                <Tab.Screen name='Todo App' component={TodoStack}/>
             </Tab.Navigator>
 
         </NavigationContainer>
