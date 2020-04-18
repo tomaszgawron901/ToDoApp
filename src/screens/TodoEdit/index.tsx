@@ -15,10 +15,9 @@ const TodoEditArea = styled.View`
     backgroundColor: ${Colors.darkGray}
 `;
 
-const HeaderButtonsContainer = styled.View`
-    width: 300px;
-    justifyContent: space-around;
-    flexDirection: row;
+const HeaderButtonContainer = styled.View`
+    marginLeft: 10px;
+    marginRight: 10px;
 `;
 
 const mapStateToProps = ( state, {route} ) => {
@@ -28,9 +27,14 @@ const mapStateToProps = ( state, {route} ) => {
     };
 };
 
-const mapDispachToProps = (dispach) => {
+const mapDispachToProps = (dispach, {route}) => {
     return {
-        dispach: dispach
+        DeleteNote() {
+            dispach(delNote(route.params.noteID));
+        },
+        UpdateNote(note: IDataState) {
+            dispach(updateNote(route.params.noteID, note));
+        }
     };
 };
 
@@ -38,28 +42,36 @@ export interface ITodoEditProps {
     noteID: number,
     note: IDataState,
     navigation: any,
-    dispach: any
+    DeleteNote: () => void;
+    UpdateNote: (IDataState) => void;
 }
 
-const TodoEdit: FC<ITodoEditProps> = ({noteID, note, dispach, navigation}) => {
-    const changeNote = (noteChanges) => {
-        dispach( updateNote(noteID, Object.assign( {}, note, noteChanges, {date: new Date()} ) ) );
+const TodoEdit: FC<ITodoEditProps> = props => {
+    let note = props.note;
+    const setNote = (editedNote: IDataState) => {
+        note = editedNote;
     };
 
-    navigation.setOptions({
+    props.navigation.setOptions({
         headerLeft: () => (
-            <HeaderButtonsContainer>
-                <Button color={Colors.black} title={'Back'} onPress={ () => { navigation.goBack(); } }/>
-                <Button color={Colors.black} title={'Save & Back'} onPress={ () => { dispach(delNote(noteID)); navigation.goBack(); } }/>
-                <Button color={Colors.black} title={'Delete'} onPress={ () => { dispach(delNote(noteID)); navigation.goBack(); } }/>
-            </HeaderButtonsContainer>
-            )
+            <HeaderButtonContainer>
+                <Button color={Colors.black} title={'Back'} onPress={ () => { props.navigation.goBack(); } }/>
+            </HeaderButtonContainer>
+        ),
+        headerTitle: () => (
+            <Button color={Colors.black} title={'Save & Back'} onPress={ () => { props.UpdateNote(note); props.navigation.goBack(); } }/>
+        ),
+        headerRight: () => (
+            <HeaderButtonContainer>
+                <Button color={Colors.black} title={'Delete'} onPress={ () => { props.DeleteNote(); props.navigation.goBack(); } }/>
+            </HeaderButtonContainer>
+        )
       });
 
     return (
         <TodoEditArea >
             <ScrollView style={{flex: 1}}>
-                <NoteEditor text={note.text} title={note.title} color={note.color} onChange={ changes => {changeNote(changes); }}/>
+                <NoteEditor note={note} onChange={ editedNote => {setNote(editedNote); }}/>
             </ScrollView>
         </TodoEditArea >
     );
