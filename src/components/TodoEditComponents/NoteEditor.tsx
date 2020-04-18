@@ -1,12 +1,11 @@
-import React, { FC, Component, useState } from 'react';
+import React, { FC, Component, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { connect } from 'react-redux';
 
 import { View, TextInput } from 'react-native';
 import Colors from '../../constans/Colors';
-import { delNote } from '../../actions/actions';
 import NoteColors from '../../constans/NoteColors';
 import ColorPicker from './ColorPicker';
+import { IDataState } from '../../reducers/NoteDataReducer';
 
 const EditContainer = styled.View`
     border: solid 1px ${Colors.black};
@@ -32,24 +31,36 @@ const HeadContainer = styled.View`
 `;
 
 export interface INoteEditorProps {
-    title: string,
-    text: string,
-    color: string,
-    onChange: Function;
+    note: IDataState;
+    onChange: (editedNote: IDataState) => void;
 }
 
-const NoteEditor: FC<INoteEditorProps> = props => {
+const NoteEditor: FC<INoteEditorProps> = ({note, onChange}) => {
+    const [color, setColor] = useState(note.color);
+    const [title, setTitle] = useState(note.title);
+    const [text, setText] = useState(note.text);
+    const [date, setDate] = useState(note.date);
+
+    useEffect(() => {
+        onChange({color, title, text, date});
+    });
 
     return (
-        <EditContainer style={{backgroundColor: NoteColors[props.color]}}>
+        <EditContainer style={{backgroundColor: NoteColors[color]}}>
             <HeadContainer>
-                <TitleEdit placeholder={'Title'} placeholderTextColor={Colors.mediumGray} value={props.title} onChangeText={ value => {props.onChange({title: value}); }}/>
+                <TitleEdit placeholder={'Title'} placeholderTextColor={Colors.mediumGray} value={title} onChangeText={ value => {setTitle(value); }}/>
                 <View style={{marginLeft: -50}}>
-                    <ColorPicker selectedColor={props.color} onChange={ (color) => { props.onChange({color: color}); }} />
+                    <ColorPicker selectedColor={color} onChange={ value => { setColor(value); }} />
                 </View>
             </HeadContainer>
             <View style={{marginTop: 20}}>
-                <TextInput placeholder={'Text'} placeholderTextColor={Colors.mediumGray} value={props.text} multiline={true} textAlignVertical={'top'} style={{fontSize: 20, minHeight: 150}} onChangeText={ value => {props.onChange({text: value}); }}/>
+                <TextInput placeholder={'Text'}
+                placeholderTextColor={Colors.mediumGray}
+                value={text}
+                multiline={true}
+                textAlignVertical={'top'}
+                style={{fontSize: 20, minHeight: 150}}
+                onChangeText={ value => { setText(value); }}/>
             </View>
 
         </EditContainer>
