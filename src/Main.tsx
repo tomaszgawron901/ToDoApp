@@ -5,12 +5,14 @@ import styled from 'styled-components/native';
 import Colors from './constans/Colors';
 import TodoApp from './screens/TodoApp';
 import TodoEdit from './screens/TodoEdit';
+import TodoAdd from './screens/TodoAdd';
 import Home from './screens/Home';
 import Screen2 from './screens/Screen2';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -33,6 +35,7 @@ const TodoStack = () => {
             headerTitleStyle: {fontWeight: 'bold'}}}>
             <Stack.Screen name='TodoApp' component={TodoApp} options={{title: 'TodoApp'}}/>
             <Stack.Screen name='edit' component={TodoEdit} options={{title: ''}} />
+            <Stack.Screen name='add' component={TodoAdd} options={{title: ''}} />
         </Stack.Navigator>
     );
 };

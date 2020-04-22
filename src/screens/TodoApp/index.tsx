@@ -14,9 +14,7 @@ const mapDispachToProps = dispach => {
 
 const TodoApp = props => {
     const onAddButtonPress = () => {
-        const action = addNote();
-        props.dispach(action);
-        props.navigation.navigate('edit', {noteID: action.id});
+        props.navigation.navigate('add');
     };
 
     const onNotePress = noteID => {

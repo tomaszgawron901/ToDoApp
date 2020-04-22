@@ -42,8 +42,9 @@ const NoteEditor: FC<INoteEditorProps> = ({note, onChange}) => {
     const [date, setDate] = useState(note.date);
 
     useEffect(() => {
+        setDate(new Date());
         onChange({color, title, text, date});
-    });
+    }, [color, title, text]);
 
     return (
         <EditContainer style={{backgroundColor: NoteColors[color]}}>
